@@ -8,7 +8,6 @@ const Child1 = document.querySelector(".Child1");
 const Child2 = document.querySelector(".Child2");
 const heading = document.querySelector(".heading");
 
-// Morse code mapping for text -> morse conversion
 const morse = {
   a: ".-",    b: "-...",  c: "-.-.",  d: "-..",
   e: ".",     f: "..-.",  g: "--.",   h: "....",
@@ -24,7 +23,6 @@ const morse = {
   "9": "----."
 };
 
-// Create reverse mapping for morse -> text conversion
 const textFromMorse = {};
 for (const key in morse) {
   if (morse.hasOwnProperty(key)) {
@@ -32,10 +30,8 @@ for (const key in morse) {
   }
 }
 
-// Mode flag: "textToMorse" or "morseToText"
 let mode = "textToMorse";
 
-// UI update functions for switching between modes
 function updateUIForTextToMorse() {
   heading.textContent = "Text to Morse Code Converter";
   Child1.style.cssText = "color:#39ff14; border:1px solid #39ff14; background-color:#112b11;";
@@ -69,7 +65,6 @@ function textToMorse() {
   output.innerHTML = outputStr.trim();
 }
 
-// Conversion function for morse-to-text
 function morseToText() {
   const str = input.value.trim();
   let outputStr = "";
@@ -78,7 +73,6 @@ function morseToText() {
     copy.style.opacity = 0;
     return;
   }
-  // Split by 3 spaces to determine words
   const words = str.split("   ");
   for (let word of words) {
     const letters = word.split(" ");
@@ -94,15 +88,15 @@ function morseToText() {
   output.innerHTML = outputStr.trim();
 }
 
-// Main convert button event
+
 button.addEventListener("click", function() {
-  // Validate non-empty input
+
   if (input.value.trim() === "") {
     output.innerHTML = '<span class="invalid">Please enter some input</span>';
     copy.style.opacity = 0;
     return;
   }
-  // Show copy button when input is valid
+
   copy.style.opacity = 1;
 
   if (mode === "textToMorse") {
@@ -112,7 +106,6 @@ button.addEventListener("click", function() {
   }
 });
 
-// Mode switching event listeners
 Child1.addEventListener("click", function() {
   mode = "textToMorse";
   updateUIForTextToMorse();
@@ -123,7 +116,6 @@ Child2.addEventListener("click", function() {
   updateUIForMorseToText();
 });
 
-// Copy the conversion result to the clipboard
 copy.addEventListener("click", function() {
   navigator.clipboard.writeText(output.textContent).then(function() {
     alertElem.style.opacity = 1;
@@ -135,7 +127,6 @@ copy.addEventListener("click", function() {
   });
 });
 
-// Clear input and output fields
 clear.addEventListener("click", function() {
   input.value = "";
   output.innerHTML = "";

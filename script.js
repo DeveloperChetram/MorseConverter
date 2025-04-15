@@ -1,190 +1,135 @@
-let input = document.querySelector("input")
-let button = document.querySelector("button")
-let output = document.querySelector(".output")
-let copy = document.querySelector(".copy")
-let alert = document.querySelector(".alert")
-let clear = document.querySelector(".clear")
-let Child1 = document.querySelector(".Child1")
-let Child2 = document.querySelector(".Child2")
-let heading = document.querySelector(".heading")
+const input = document.querySelector("input");
+const button = document.querySelector("button");
+const output = document.querySelector(".output");
+const copy = document.querySelector(".copy");
+const alertElem = document.querySelector(".alert");
+const clear = document.querySelector(".clear");
+const Child1 = document.querySelector(".Child1");
+const Child2 = document.querySelector(".Child2");
+const heading = document.querySelector(".heading");
 
+const morse = {
+  a: ".-",    b: "-...",  c: "-.-.",  d: "-..",
+  e: ".",     f: "..-.",  g: "--.",   h: "....",
+  i: "..",    j: ".---",  k: "-.-",   l: ".-..",
+  m: "--",    n: "-.",    o: "---",   p: ".--.",
+  q: "--.-",  r: ".-.",   s: "...",   t: "-",
+  u: "..-",   v: "...-",  w: ".--",   x: "-..-",
+  y: "-.--",  z: "--..",
+  " ": "   ",
+  "0": "-----", "1": ".----", "2": "..---",
+  "3": "...--", "4": "....-", "5": ".....",
+  "6": "-....", "7": "--...", "8": "---..",
+  "9": "----."
+};
 
-let morse=
-    {
-        a: ".-",
-        b: "-...",
-        c: "-.-.",
-        d: "-..",
-        e: ".",
-        f: "..-.",
-        g: "--.",
-        h: "....",
-        i: "..",
-        j: ".---",
-        k: "-.-",
-        l: ".-..",
-        m: "--",
-        n: "-.",
-        o: "---",
-        p: ".--.",
-        q: "--.-",
-        r: ".-.",
-        s: "...",
-        t: "-",
-        u: "..-",
-        v: "...-",
-        w: ".--",
-        x: "-..-",
-        y: "-.--",
-        z: "--..",
-        " ":"   ",
-        "0": "-----",
-        "1": ".----",
-        "2": "..---",
-        "3": "...--",
-        "4": "....-",
-        "5": ".....",
-        "6": "-....",
-        "7": "--...",
-        "8": "---..",
-        "9": "----.",
-        
+const textFromMorse = {};
+for (const key in morse) {
+  if (morse.hasOwnProperty(key)) {
+    textFromMorse[morse[key]] = key;
+  }
+}
 
+let mode = "textToMorse";
+
+function updateUIForTextToMorse() {
+  heading.textContent = "Text to Morse Code Converter";
+  Child1.style.cssText = "color:#39ff14; border:1px solid #39ff14; background-color:#112b11;";
+  Child2.style.cssText = "color:#d9d9d9; border:1px solid #d9d9d9; background-color:transparent; transition:0.5s;";
+}
+
+function updateUIForMorseToText() {
+  heading.textContent = "Morse Code to Text Converter";
+  Child2.style.cssText = "color:#39ff14; border:1px solid #39ff14; background-color:#112b11;";
+  Child1.style.cssText = "color:#d9d9d9; border:1px solid #d9d9d9; background-color:transparent; transition:0.5s;";
+}
+
+// Conversion function for text-to-morse
+function textToMorse() {
+  const str = input.value.toLowerCase();
+  let outputStr = "";
+  if (!str.trim()) {
+    output.innerHTML = '<span class="invalid">Please enter some input</span>';
+    copy.style.opacity = 0;
+    return;
+  }
+  for (let char of str) {
+    if (char === " ") {
+      outputStr += "   ";
+    } else if (morse[char]) {
+      outputStr += morse[char] + " ";
+    } else {
+      outputStr += '<span class="invalid">Invalid Input</span> ';
     }
-    let str =''
-    let outputStr = ''
-    function MtoT(){
-        button.addEventListener("click", function(){
-           
-            if(input.value==="." || input.value==="-"){
-              
-                outputStr +=""
-                output.innerHTML = outputStr.trim();
-            }
-            else{
-                // outputStr += '<span class="invalid">Please enter any input to convert it into Morse</span> '  
-                output.innerHTML = outputStr.trim();
-            }
-         })
+  }
+  output.innerHTML = outputStr.trim();
+}
+
+function morseToText() {
+  const str = input.value.trim();
+  let outputStr = "";
+  if (!str) {
+    output.innerHTML = '<span class="invalid">Please enter some input</span>';
+    copy.style.opacity = 0;
+    return;
+  }
+  const words = str.split("   ");
+  for (let word of words) {
+    const letters = word.split(" ");
+    for (let letter of letters) {
+      if (textFromMorse[letter]) {
+        outputStr += textFromMorse[letter];
+      } else {
+        outputStr += '<span class="invalid">?</span>';
+      }
     }
-    button.addEventListener("click", function(){
-        if(input.value==="" || input.value===" "){
-            outputStr += '<span class="invalid">Please enter any input to convert it into Morse</span> '
-            console.log("Invalid Input")
-            output.innerHTML = outputStr.trim();
-        }
-  
-        if(input.value==''|| input.value===" "){
-            copy.style.opacity = 0
-         
-        }
-        else{
-            copy.style.opacity = 1
-        }
-    str=input.value.toLowerCase() 
-           convert()
+    outputStr += " ";
+  }
+  output.innerHTML = outputStr.trim();
+}
 
-    })
- function convert(){
-    for (let char of str) {
-        if (char === ' ') {
-            outputStr += '   ';
-        } else if (morse[char]) {
-            outputStr += morse[char] + ' '; 
-        } else {
-            outputStr += '<span class="invalid">Invalid Input</span> '; // for unknown characters
-        }
-    }
-    output.innerHTML = outputStr.trim(); 
 
-    outputStr = ''; 
+button.addEventListener("click", function() {
 
- }
- copy.addEventListener("click", function(){
-    navigator.clipboard.writeText(output.textContent).then(function() {
-  
-        setTimeout(() => {
-            
-            alert.style.opacity = 1;
-          
-           
-            setTimeout(() => {
-              alert.style.opacity = 0;
-            }, 3000);
-          
-          }, 60);
-    }, function(err) {
-        console.error('Could not copy text: ', err);
-    });
-    })
+  if (input.value.trim() === "") {
+    output.innerHTML = '<span class="invalid">Please enter some input</span>';
+    copy.style.opacity = 0;
+    return;
+  }
 
- clear.addEventListener("click", function(){
-    input.value = ''
-    output.innerHTML = ''
-    copy.style.opacity = 0
-    alert.style.opacity = 0;
-    outputStr = ''; 
-    str = ''
- })
- let flag = 1;
+  copy.style.opacity = 1;
 
- Child2.addEventListener("click", function() {
+  if (mode === "textToMorse") {
+    textToMorse();
+  } else {
+    morseToText();
+  }
+});
 
-     if (flag == 1) {
-       let arr= str.split(' ')
+Child1.addEventListener("click", function() {
+  mode = "textToMorse";
+  updateUIForTextToMorse();
+});
 
-         heading.innerHTML = "Morse Code to Text Converter";
-         Child2.style.border = "1px solid #39ff14";
-         Child2.style.backgroundColor = "#112b11";
-         Child2.style.color = "#39ff14";
-         Child1.style.color = "#d9d9d9";
-         Child1.style.border = "1px solid #d9d9d9";
-         Child1.style.backgroundColor = "transparent";
-         Child1.style.transition = "0.5s";
-         flag = 0;
-         button.addEventListener("click",  MtoT)
-       
-     
-        console.log(arr)
-     } else {
-         heading.innerHTML = "Text to Morse Code Converter";
-         Child1.style.color = "#39ff14";
-         Child1.style.border = "1px solid #39ff14";
-         Child1.style.backgroundColor = "#112b11";
-         Child2.style.color = "#d9d9d9";
-         Child2.style.border = "1px solid #d9d9d9";
-         Child2.style.backgroundColor = "transparent";
-         Child2.style.transition = "0.5s";
-         flag = 1;
-         button.addEventListener("click",  convert)
-         console.log("convert called")
-     }
- });
- 
- Child1.addEventListener("click", function() {
-     if (flag == 0) {
-        
-         heading.innerHTML = "Text to Morse Code Converter";
-         Child1.style.color = "#39ff14";
-         Child1.style.border = "1px solid #39ff14";
-         Child1.style.backgroundColor = "#112b11";
-         Child2.style.color = "#d9d9d9";
-         Child2.style.border = "1px solid #d9d9d9";
-         Child2.style.backgroundColor = "transparent";
-         Child2.style.transition = "0.5s";
-         flag = 1;
-         button.addEventListener("click",  convert)
-     } else {
-         heading.innerHTML = "Morse Code to Text Converter";
-         Child2.style.border = "1px solid #39ff14";
-         Child2.style.backgroundColor = "#112b11";
-         Child2.style.color = "#39ff14";
-         Child1.style.color = "#d9d9d9";
-         Child1.style.border = "1px solid #d9d9d9";
-         Child1.style.backgroundColor = "transparent";
-         Child1.style.transition = "0.5s";
-         flag = 0;
-         button.addEventListener("click",  MtoT)
-     }
- });
- 
+Child2.addEventListener("click", function() {
+  mode = "morseToText";
+  updateUIForMorseToText();
+});
+
+copy.addEventListener("click", function() {
+  navigator.clipboard.writeText(output.textContent).then(function() {
+    alertElem.style.opacity = 1;
+    setTimeout(function() {
+      alertElem.style.opacity = 0;
+    }, 3000);
+  }, function(err) {
+    console.error('Could not copy text:', err);
+  });
+});
+
+clear.addEventListener("click", function() {
+  input.value = "";
+  output.innerHTML = "";
+  copy.style.opacity = 0;
+  alertElem.style.opacity = 0;
+});

@@ -1,0 +1,141 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #0d1117;
+  color: #c9d1d9;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+body main {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+body main .alert {
+  transition: all 0.3s ease;
+  opacity: 0;
+  font-size: 0.8rem;
+  border: 1px solid #39ff14;
+  background-color: #112b11;
+  color: #39ff14;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  text-align: center;
+}
+body main input {
+  width: 90%;
+  height: 20%;
+  border-radius: 5px;
+  border: 1px solid #30363d;
+  background-color: #161b22;
+  padding: 10px;
+  font-size: 16px;
+  color: #c9d1d9;
+}
+body main pre {
+  width: 90%;
+  height: 25%;
+}
+body main pre .output {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.5;
+  position: relative;
+  font-weight: 900;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  border: 1px solid #30363d;
+  background-color: #161b22;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #169600;
+  overflow-y: auto;
+}
+body main button {
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  background-color: #179b00;
+  color: #0d1117;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+body main button:hover {
+  background-color: #2ecc71;
+}
+body main button:active {
+  transform: scale(0.95);
+}
+body main .clear {
+  width: 300px;
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: #0d1117;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  background-color: #ff6b6b;
+}
+body main .clear:hover {
+  background-color: #f83c3c;
+  border: 2px solid #330000;
+  color: #0d1117;
+}
+
+.invalid {
+  font-size: 0.7rem;
+  border: 1px solid #ff6b6b;
+  background-color: #330000;
+  color: #ff6b6b;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 90%;
+  text-align: center;
+}
+
+.copy {
+  opacity: 0;
+  top: 0;
+  right: 10px;
+  font-size: 1rem;
+  background-color: #00bd1c;
+  color: #f1f1f1;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid transparent;
+  text-align: center;
+  cursor: pointer;
+}
+.copy:hover {
+  background-color: transparent;
+  color: #00bd1c;
+  border: 1px solid #00bd1c;
+}
+.copy:active {
+  transform: scale(0.95);
+}/*# sourceMappingURL=style.css.map */

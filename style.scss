@@ -1,0 +1,167 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0d1117; // GitHub dark background
+    color: #c9d1d9; // GitHub dark text color
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    main {
+
+        .alert {
+            transition: all 0.3s ease;
+            // display: none;
+            opacity: 0;
+            font-size: .8rem;
+            border: 1px solid #39ff14;           // Neon green border
+            background-color: #112b11;           // Dark greenish background
+            color: #39ff14;                      // Neon green text
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            // width: 90%;
+            text-align: center;
+            
+            // border: 1px solid transparent;
+            text-align: center;
+        }
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+      
+      input {
+        width: 90%;
+        height: 20%;
+        border-radius: 5px;
+        border: 1px solid #30363d; // Subtle dark border
+        background-color: #161b22; // Dark background for inputs
+        padding: 10px;
+        font-size: 16px;
+        color: #c9d1d9; // Matching text color
+      }
+      
+      pre {
+        width: 90%;
+        height: 25%;
+        
+        .output {
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            word-break: break-word;
+            // word-wrap: break-word;
+            // word-break: break-word;
+            line-height: 1.5; // Improved line spacing
+            // white-space: wrap; // Prevent overflow
+            position: relative;
+            // font-size: large;
+            font-weight: 900;
+          padding: 20px;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          border: 1px solid #30363d;
+          background-color: #161b22;
+          font-size: 1.5rem; // Increased output text size
+          line-height: 1.5; // Improved line spacing
+          color: #169600; // Neon green text for output
+          overflow-y: auto; // Scroll if content overflows
+            
+          
+          
+          
+        }
+      }
+      
+      button {
+        width: 300px;
+        height: 40px;
+        border-radius: 5px;
+        border: none;
+        background-color: #179b00; // Neon green button
+        color: #0d1117; // Dark text on neon for contrast
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        
+        &:hover {
+          background-color: #2ecc71; // Slightly different green on hover
+        }
+        
+        &:active {
+          transform: scale(0.95); // Quick scale down effect when clicked
+        }
+      }
+      .clear {
+        width: 300px;
+        height: 40px;
+        border-radius: 5px;
+        border: none;
+        border: 1px solid transparent;        // Neon green border
+        background-color: transparent;           // Dark greenish background
+        color: #0d1117;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.1s ease;
+        background-color: #ff6b6b; // Slightly different green on hover
+        &:hover {
+          background-color: #f83c3c; // Slightly different green on hover
+         border:2px solid #330000 ;
+          color: #0d1117; // Dark text on neon for contrast
+        }
+    }
+    }
+  }
+  
+  .invalid {
+    font-size: .7rem;
+    border: 1px solid #ff6b6b;
+    background-color: #330000;
+    color: #ff6b6b;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 90%;
+    text-align: center;
+  }
+  
+
+
+    .copy {
+        opacity: 0;
+        // display: none;
+        // position: absolute;
+        top: 0;
+        right:10px;
+        font-size: 1rem;
+        background-color: #00bd1c;
+        color: #f1f1f1;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-top: 10px;
+        // width: 90%;
+        border: 1px solid transparent;
+        text-align: center;
+        cursor: pointer;
+        &:hover {
+            background-color: transparent;
+            color: #00bd1c;
+            border: 1px solid #00bd1c;
+    
+        }
+        &:active {
+            transform: scale(0.95); // Quick scale down effect when clicked
+        }
+    }

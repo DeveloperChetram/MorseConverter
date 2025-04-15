@@ -55,7 +55,7 @@ function textToMorse() {
   }
   for (let char of str) {
     if (char === " ") {
-      outputStr += "   ";
+      outputStr += "  ";
     } else if (morse[char]) {
       outputStr += morse[char] + " ";
     } else {
@@ -80,7 +80,7 @@ function morseToText() {
       if (textFromMorse[letter]) {
         outputStr += textFromMorse[letter];
       } else {
-        outputStr += '<span class="invalid">?</span>';
+        outputStr += '<span class="invalid"> Invalid</span>';
       }
     }
     outputStr += " ";

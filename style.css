@@ -24,6 +24,29 @@ body main {
   flex-direction: column;
   gap: 20px;
 }
+body main .toggle {
+  display: flex;
+  gap: 10px;
+  padding-top: 10px;
+}
+body main .toggle span {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.8rem;
+  border: 1px solid #39ff14;
+  background-color: #112b11;
+  color: #39ff14;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  text-align: center;
+  text-align: center;
+}
+body main .toggle span:nth-child(2) {
+  color: #d9d9d9;
+  border: 1px solid #d9d9d9;
+  background-color: transparent;
+}
 body main .alert {
   transition: all 0.3s ease;
   opacity: 0;
@@ -138,4 +161,29 @@ body main .clear:hover {
 }
 .copy:active {
   transform: scale(0.95);
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  main {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+  }
+  main h1 {
+    text-align: center;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
 }/*# sourceMappingURL=style.css.map */

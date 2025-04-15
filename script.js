@@ -4,6 +4,9 @@ let output = document.querySelector(".output")
 let copy = document.querySelector(".copy")
 let alert = document.querySelector(".alert")
 let clear = document.querySelector(".clear")
+let Child1 = document.querySelector(".Child1")
+let Child2 = document.querySelector(".Child2")
+let heading = document.querySelector(".heading")
 
 
 let morse=
@@ -50,6 +53,20 @@ let morse=
     }
     let str =''
     let outputStr = ''
+    function MtoT(){
+        button.addEventListener("click", function(){
+           
+            if(input.value==="." || input.value==="-"){
+              
+                outputStr +=""
+                output.innerHTML = outputStr.trim();
+            }
+            else{
+                // outputStr += '<span class="invalid">Please enter any input to convert it into Morse</span> '  
+                output.innerHTML = outputStr.trim();
+            }
+         })
+    }
     button.addEventListener("click", function(){
         if(input.value==="" || input.value===" "){
             outputStr += '<span class="invalid">Please enter any input to convert it into Morse</span> '
@@ -109,3 +126,65 @@ let morse=
     outputStr = ''; 
     str = ''
  })
+ let flag = 1;
+
+ Child2.addEventListener("click", function() {
+
+     if (flag == 1) {
+       let arr= str.split(' ')
+
+         heading.innerHTML = "Morse Code to Text Converter";
+         Child2.style.border = "1px solid #39ff14";
+         Child2.style.backgroundColor = "#112b11";
+         Child2.style.color = "#39ff14";
+         Child1.style.color = "#d9d9d9";
+         Child1.style.border = "1px solid #d9d9d9";
+         Child1.style.backgroundColor = "transparent";
+         Child1.style.transition = "0.5s";
+         flag = 0;
+         button.addEventListener("click",  MtoT)
+       
+     
+        console.log(arr)
+     } else {
+         heading.innerHTML = "Text to Morse Code Converter";
+         Child1.style.color = "#39ff14";
+         Child1.style.border = "1px solid #39ff14";
+         Child1.style.backgroundColor = "#112b11";
+         Child2.style.color = "#d9d9d9";
+         Child2.style.border = "1px solid #d9d9d9";
+         Child2.style.backgroundColor = "transparent";
+         Child2.style.transition = "0.5s";
+         flag = 1;
+         button.addEventListener("click",  convert)
+         console.log("convert called")
+     }
+ });
+ 
+ Child1.addEventListener("click", function() {
+     if (flag == 0) {
+        
+         heading.innerHTML = "Text to Morse Code Converter";
+         Child1.style.color = "#39ff14";
+         Child1.style.border = "1px solid #39ff14";
+         Child1.style.backgroundColor = "#112b11";
+         Child2.style.color = "#d9d9d9";
+         Child2.style.border = "1px solid #d9d9d9";
+         Child2.style.backgroundColor = "transparent";
+         Child2.style.transition = "0.5s";
+         flag = 1;
+         button.addEventListener("click",  convert)
+     } else {
+         heading.innerHTML = "Morse Code to Text Converter";
+         Child2.style.border = "1px solid #39ff14";
+         Child2.style.backgroundColor = "#112b11";
+         Child2.style.color = "#39ff14";
+         Child1.style.color = "#d9d9d9";
+         Child1.style.border = "1px solid #d9d9d9";
+         Child1.style.backgroundColor = "transparent";
+         Child1.style.transition = "0.5s";
+         flag = 0;
+         button.addEventListener("click",  MtoT)
+     }
+ });
+ 

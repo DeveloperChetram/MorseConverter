@@ -13,7 +13,7 @@ node_modules/
 Thumbs.db
 
 # Specific project file
-scriptAi.js
+./scriptAi.js
 
 # Logs
 *.log

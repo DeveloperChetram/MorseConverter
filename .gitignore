@@ -18,6 +18,9 @@ Thumbs.db
 # Logs
 *.log
 
+logo.png
+
+
 # Build directories
 dist/
 build/

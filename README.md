@@ -1,26 +1,21 @@
-# 🔠 Morse Code Converter 🔁
+<p align="center">
+  <img src="logo.webp" width="100" alt="Morse Logo" />
+</p>
 
-This is a simple and interactive Morse Code Converter built using **HTML, CSS, and JavaScript**. It allows users to:
+<h1 align="center">💡 Morse Code Converter</h1>
 
-- ✅ Convert **Text to Morse Code**
-- ✅ Convert **Morse Code to Text**
-- 📋 Copy the converted output
-- 🧹 Clear the input/output easily
-
----
-
-## 🌟 Features
-
-- 🎯 Dual Conversion Modes: `Text ➝ Morse` and `Morse ➝ Text`
-- ✨ Easy-to-use interface
-- 📱 Responsive design
-- 🔔 Alert for successful copy
-- ❗ Error handling for invalid or empty input
+<p align="center">
+  🔤 Convert Text ⟷ Morse Code easily using a sleek UI  
+  <br />
+  Try Here <a href="https://texttomorse.netlify.app/"><strong>🌐 Live Demo</strong></a> |
+  <a href="https://github.com/DeveloperChetram/MorseConverter.git">📦 Clone This Repo</a>
+</p>
 
 ---
 
-## 🚀 How to Use
+## 🖼️ Preview
 
-1. Clone the repository or download the ZIP.
-   ```bash
-   git clone https://github.com/yourusername/morse-code-converter.git
+
+<p align="center">
+  <img src="./assets/preview.gif" width="700" alt="App Preview">
+</p>

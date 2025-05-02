@@ -88,7 +88,23 @@ function morseToText() {
   output.innerHTML = outputStr.trim();
 }
 
-
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    if (input.value.trim() === "") {
+      output.innerHTML = '<span class="invalid">Please enter some input</span>';
+      copy.style.opacity = 0;
+      return;
+    }
+  
+    copy.style.opacity = 1;
+  
+    if (mode === "textToMorse") {
+      textToMorse();
+    } else {
+      morseToText();
+    }
+  }
+});
 button.addEventListener("click", function() {
 
   if (input.value.trim() === "") {

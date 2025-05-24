@@ -7,6 +7,9 @@ const clear = document.querySelector(".clear");
 const Child1 = document.querySelector(".Child1");
 const Child2 = document.querySelector(".Child2");
 const heading = document.querySelector(".heading");
+const helpButton = document.querySelector(".help-button");
+const helpModal = document.querySelector(".help-modal");
+const closeModal = document.querySelector(".close-modal");
 
 const morse = {
   a: ".-",    b: "-...",  c: "-.-.",  d: "-..",
@@ -148,4 +151,26 @@ clear.addEventListener("click", function() {
   output.innerHTML = "";
   copy.style.opacity = 0;
   alertElem.style.opacity = 0;
+});
+
+helpButton.addEventListener("click", function() {
+    helpModal.classList.add("active");
+});
+
+closeModal.addEventListener("click", function() {
+    helpModal.classList.remove("active");
+});
+
+// Close modal when clicking outside
+helpModal.addEventListener("click", function(e) {
+    if (e.target === helpModal) {
+        helpModal.classList.remove("active");
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && helpModal.classList.contains("active")) {
+        helpModal.classList.remove("active");
+    }
 });

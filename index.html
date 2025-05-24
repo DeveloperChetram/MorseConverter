@@ -3,33 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>morse</title>
+    <title>Morse Code Converter</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/webp" href="logo.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="help-button">?</div>
+    <div class="help-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Morse Code Converter Guide</h2>
+            <div class="guide-content">
+                <h3>Text to Morse Mode:</h3>
+                <ul>
+                    <li>Only letters (A-Z) and numbers (0-9) are supported</li>
+                    <li>Special characters are not allowed</li>
+                    <li>Spaces between words will be converted to three spaces in morse code</li>
+                </ul>
+                <h3>Morse to Text Mode:</h3>
+                <ul>
+                    <li>Only valid morse code characters (dots and dashes) are supported</li>
+                    <li>Use single space to separate letters</li>
+                    <li>Use three spaces to separate words</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <main>
         <div class="toggle">
-              <span class="Child1">
-                Text to Morse
-              </span>
-              <span class="Child2">
-                Morse to Text
-              </span>
+            <span class="Child1">Text to Morse</span>
+            <span class="Child2">Morse to Text</span>
         </div>
         <div class="alert">
             <span>Code copied to clipboard</span>
         </div>
         <h1 class="heading">Text to Morse Code Converter</h1>
         <input type="text" placeholder="Enter your text here">
-       <div class="buttons"> <button>Convert</button>
-        <button class="clear">Clear</button></div>
+        <div class="buttons">
+            <button>Convert</button>
+            <button class="clear">Clear</button>
+        </div>
         <span class="copy">Copy</span>
-      <pre>
-            <div class="output">
-            </div>
-      </pre>
-
+        <h2 class="output-heading">Output</h2>
+        <pre>
+            <div class="output"></div>
+        </pre>
     </main>
     <script src="script.js"></script>
 </body>

@@ -18,7 +18,8 @@ body {
   align-items: center;
   flex-direction: column;
 }
-body main {
+
+main {
   width: 100%;
   height: 100%;
   display: flex;
@@ -27,12 +28,14 @@ body main {
   flex-direction: column;
   gap: 20px;
 }
-body main .toggle {
+
+.toggle {
   display: flex;
   gap: 10px;
   padding-top: 10px;
 }
-body main .toggle span {
+
+.toggle span {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.8rem;
@@ -43,14 +46,15 @@ body main .toggle span {
   border-radius: 5px;
   margin-top: 10px;
   text-align: center;
-  text-align: center;
 }
-body main .toggle span:nth-child(2) {
+
+.toggle span:nth-child(2) {
   color: #d9d9d9;
   border: 1px solid #d9d9d9;
   background-color: transparent;
 }
-body main .alert {
+
+.alert {
   transition: all 0.3s ease;
   opacity: 0;
   font-size: 0.8rem;
@@ -61,25 +65,35 @@ body main .alert {
   border-radius: 5px;
   margin-top: 10px;
   text-align: center;
-  text-align: center;
 }
-body main input {
-  -webkit-backdrop-filter: blur(1.5px);
-          backdrop-filter: blur(1.5px);
+
+input {
+  backdrop-filter: blur(1.5px);
   width: 90%;
   height: 20%;
   border-radius: 5px;
   border: 1px solid #30363d;
-  background-color: rgba(22, 27, 34, 0.5333333333);
+  background-color: #161b2288;
   padding: 10px;
   font-size: 16px;
   color: #c9d1d9;
 }
-body main pre {
+
+.output-heading {
+  color: #c9d1d9;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 90%;
+  font-weight: 500;
+}
+
+pre {
   width: 90%;
   height: 25%;
 }
-body main pre .output {
+
+.output {
   overflow-wrap: break-word;
   white-space: pre-wrap;
   word-break: break-word;
@@ -91,15 +105,15 @@ body main pre .output {
   height: 100%;
   border-radius: 5px;
   border: 1px solid #30363d;
-  -webkit-backdrop-filter: blur(1.5px);
-          backdrop-filter: blur(1.5px);
-  background-color: rgba(22, 27, 34, 0.5333333333);
+  backdrop-filter: blur(1.5px);
+  background-color: #161b2288;
   font-size: 1.5rem;
   line-height: 1.5;
   color: #169600;
   overflow-y: auto;
 }
-body main button {
+
+button {
   width: 300px;
   height: 40px;
   border-radius: 5px;
@@ -110,17 +124,19 @@ body main button {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.1s ease;
 }
-body main button:hover {
+
+button:hover {
   background-color: #2ecc71;
 }
-body main button:active {
+
+button:active {
   transform: scale(0.95);
 }
-body main .clear {
+
+.clear {
   width: 300px;
   height: 40px;
   border-radius: 5px;
-  border: none;
   border: 1px solid transparent;
   background-color: transparent;
   color: #0d1117;
@@ -129,7 +145,8 @@ body main .clear {
   transition: background-color 0.3s ease, transform 0.1s ease;
   background-color: #ff6b6b;
 }
-body main .clear:hover {
+
+.clear:hover {
   background-color: #f83c3c;
   border: 2px solid #330000;
   color: #0d1117;
@@ -161,13 +178,112 @@ body main .clear:hover {
   text-align: center;
   cursor: pointer;
 }
+
 .copy:hover {
   background-color: transparent;
   color: #00bd1c;
   border: 1px solid #00bd1c;
 }
+
 .copy:active {
   transform: scale(0.95);
+}
+
+.help-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background-color: #161b22;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.help-button:hover {
+  background-color: #21262d;
+  border-color: #8b949e;
+}
+
+.help-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1001;
+  backdrop-filter: blur(5px);
+}
+
+.help-modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  color: #c9d1d9;
+}
+
+.modal-content h2 {
+  color: #39ff14;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.modal-content h3 {
+  color: #8b949e;
+  margin: 15px 0 10px;
+  font-size: 1.1rem;
+}
+
+.modal-content ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.modal-content ul li {
+  margin: 8px 0;
+  position: relative;
+  padding-left: 20px;
+}
+
+.modal-content ul li:before {
+  content: "•";
+  color: #39ff14;
+  position: absolute;
+  left: 0;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #8b949e;
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+  color: #39ff14;
 }
 
 @media screen and (max-width: 768px) {
@@ -176,14 +292,17 @@ body main .clear:hover {
     align-items: center;
     justify-content: center;
   }
+
   main {
     width: 100%;
     height: 100%;
     padding: 20px;
   }
+
   main h1 {
     text-align: center;
   }
+
   .buttons {
     display: flex;
     flex-direction: column;
@@ -193,4 +312,15 @@ body main .clear:hover {
     justify-content: center;
     align-items: center;
   }
-}/*# sourceMappingURL=style.css.map */
+
+  .help-button {
+    top: 10px;
+    right: 10px;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 10px;
+    padding: 15px;
+  }
+}

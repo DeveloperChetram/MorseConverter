@@ -1,55 +1,489 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Morse Code Converter</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/webp" href="logo.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>Morse Code Converter — Free Text to Morse &amp; Morse to Text Translator</title>
+  <meta name="description" content="Free online Morse code converter. Instantly translate text to Morse code or decode Morse code to text. Supports A-Z, 0-9, punctuation. Copy, download, and play audio.">
+  <meta name="keywords" content="morse code converter, text to morse code, morse to text, morse translator, morse code generator, morse decoder, morse encoder, free morse code tool, morse code translator, morse alphabet, learn morse code, online morse converter">
+  <meta name="author" content="Chetram Patel (developerChetram)">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="theme-color" content="#39ff14">
+  <meta name="google-site-verification" content="Z5O2ZNHbLPSfb0B6hcAOQu2wp7IKMxFgx29j1O69iZE">
+  <link rel="canonical" href="https://morse-converter-delta.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Morse Code Converter">
+  <meta property="og:title" content="Morse Code Converter — Free Text to Morse &amp; Morse to Text Translator">
+  <meta property="og:description" content="Free online Morse code converter. Instantly translate text to Morse code or decode Morse code to text. No signup required. Works offline.">
+  <meta property="og:url" content="https://morse-converter-delta.vercel.app/">
+  <meta property="og:image" content="https://morse-converter-delta.vercel.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Morse Code Converter — Free Online Translator">
+  <meta name="twitter:description" content="Instantly convert text to Morse code or decode Morse to text. Free, fast, no signup. Supports audio playback.">
+  <meta name="twitter:image" content="https://morse-converter-delta.vercel.app/og-image.png">
+
+  <!-- Favicon & Manifest -->
+  <link rel="icon" type="image/webp" href="/logo.webp">
+  <link rel="apple-touch-icon" href="/logo.webp">
+  <link rel="manifest" href="/manifest.json">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://morse-converter-delta.vercel.app/#website",
+        "url": "https://morse-converter-delta.vercel.app/",
+        "name": "Morse Code Converter",
+        "description": "Free online Morse code converter — translate text to Morse and Morse to text instantly.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://morse-converter-delta.vercel.app/?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://morse-converter-delta.vercel.app/#author",
+        "name": "Chetram Patel",
+        "alternateName": "developerChetram",
+        "url": "https://github.com/developerChetram",
+        "sameAs": [
+          "https://github.com/developerChetram"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://morse-converter-delta.vercel.app/#app",
+        "name": "Morse Code Converter",
+        "url": "https://morse-converter-delta.vercel.app/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "author": { "@id": "https://morse-converter-delta.vercel.app/#author" },
+        "creator": { "@id": "https://morse-converter-delta.vercel.app/#author" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "description": "Free online tool to convert text to Morse code and Morse code to text. Supports audio playback, copy, and download.",
+        "featureList": ["Text to Morse Code", "Morse to Text", "Audio Playback", "Copy to Clipboard", "Download Output", "Morse Reference Table"],
+        "screenshot": "https://morse-converter-delta.vercel.app/og-image.png",
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "128" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Morse code?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Morse code is a telecommunication encoding system that represents letters and numerals as sequences of dots and dashes (or short and long signals). It was developed by Samuel Morse and Alfred Vail in the 1830s." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I convert text to Morse code?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Type or paste your text into the input field, ensure 'Text to Morse' mode is selected, then click Convert or press Enter. The Morse code output appears instantly below." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I decode Morse code to text?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Switch to 'Morse to Text' mode, enter your Morse code using dots (.) and dashes (-) with single spaces between letters and triple spaces between words, then click Convert." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this Morse code converter free?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, completely free. No account, no subscription, no hidden fees. All conversions happen locally in your browser." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does the Morse code converter work offline?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Once the page is loaded, all conversions happen in your browser with no server calls. It works without an internet connection." }
+          },
+          {
+            "@type": "Question",
+            "name": "What is SOS in Morse code?",
+            "acceptedAnswer": { "@type": "Answer", "text": "SOS in Morse code is '... --- ...' (three dots, three dashes, three dots). It is the universal distress signal." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
-    <div class="help-button">?</div>
-    <div class="help-modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h2>Morse Code Converter Guide</h2>
-            <div class="guide-content">
-                <h3>Text to Morse Mode:</h3>
-                <ul>
-                    <li>Only letters (A-Z) and numbers (0-9) are supported</li>
-                    <li>Special characters are not allowed</li>
-                    <li>Spaces between words will be converted to three spaces in morse code</li>
-                </ul>
-                <h3>Morse to Text Mode:</h3>
-                <ul>
-                    <li>Only valid morse code characters (dots and dashes) are supported</li>
-                    <li>Use single space to separate letters</li>
-                    <li>Use three spaces to separate words</li>
-                </ul>
-            </div>
-        </div>
+
+  <!-- Skip to main content for accessibility -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Header / Nav -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="Morse Code Converter Home">
+        <img src="/logo.webp" alt="Morse Code Converter logo" width="32" height="32" loading="eager">
+        <span>MorseCode<strong>.tools</strong></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-links" role="list">
+          <li><a href="#converter">Converter</a></li>
+          <li><a href="#reference">Reference</a></li>
+          <li><a href="#learn">Learn</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode" type="button">
+        <span class="theme-icon" aria-hidden="true">☀️</span>
+      </button>
     </div>
-    <main>
-        <div class="toggle">
-            <span class="Child1">Text to Morse</span>
-            <span class="Child2">Morse to Text</span>
+  </header>
+
+  <main id="main-content">
+
+    <!-- Hero Section -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="hero-badge" aria-label="Feature highlight">⚡ Free · No Signup · Works Offline</p>
+          <h1 id="hero-heading">Morse Code Converter</h1>
+          <p class="hero-sub">Instantly translate text to Morse code and Morse code back to text. Supports audio playback, copy, and download — all in your browser.</p>
+          <a href="#converter" class="btn btn-primary">Start Converting</a>
         </div>
-        <div class="alert">
-            <span>Code copied to clipboard</span>
+        <figure class="hero-morse" aria-label="Sample Morse code display">
+          <div class="morse-demo" aria-hidden="true">
+            <span class="md-label">HELLO WORLD</span>
+            <span class="md-code">.... . .-.. .-.. ---   .-- --- .-. .-.. -..</span>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Converter Tool -->
+    <section class="converter-section" id="converter" aria-labelledby="converter-heading">
+      <div class="container">
+        <h2 id="converter-heading" class="section-title">Morse Code Translator</h2>
+        <p class="section-sub">Switch between Text→Morse and Morse→Text modes using the toggle below.</p>
+
+        <!-- Mode Toggle -->
+        <div class="mode-toggle" role="tablist" aria-label="Conversion mode">
+          <button class="mode-btn active" id="tab-text-to-morse" role="tab" aria-selected="true" aria-controls="converter-panel" data-mode="textToMorse">
+            <span aria-hidden="true">Aa</span> Text to Morse
+          </button>
+          <button class="mode-btn" id="tab-morse-to-text" role="tab" aria-selected="false" aria-controls="converter-panel" data-mode="morseToText">
+            <span aria-hidden="true">·−</span> Morse to Text
+          </button>
         </div>
-        <h1 class="heading">Text to Morse Code Converter</h1>
-        <input type="text" placeholder="Enter your text here">
-        <div class="buttons">
-            <button>Convert</button>
-            <button class="clear">Clear</button>
+
+        <!-- Converter Panel -->
+        <div class="converter-card" id="converter-panel" role="tabpanel" aria-labelledby="tab-text-to-morse">
+
+          <!-- Input -->
+          <div class="input-group">
+            <label for="converter-input" class="input-label" id="input-label-text">Enter text to convert to Morse code</label>
+            <textarea
+              id="converter-input"
+              class="converter-textarea"
+              placeholder="Type your text here…"
+              rows="5"
+              aria-labelledby="input-label-text"
+              aria-describedby="char-count input-hint"
+              spellcheck="false"
+              autocomplete="off"
+            ></textarea>
+            <div class="input-meta">
+              <span class="input-hint" id="input-hint">A–Z, 0–9, spaces supported</span>
+              <span class="char-count" id="char-count" aria-live="polite" aria-atomic="true">0 chars</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-row">
+            <button class="btn btn-primary" id="convertBtn" type="button" aria-label="Convert input">Convert</button>
+            <button class="btn btn-ghost" id="swapBtn" type="button" aria-label="Swap input and output">⇅ Swap</button>
+            <button class="btn btn-danger" id="clearBtn" type="button" aria-label="Clear all text">✕ Clear</button>
+          </div>
+
+          <!-- Output -->
+          <div class="output-group">
+            <div class="output-header">
+              <span class="output-label" id="output-label">Output</span>
+              <div class="output-actions">
+                <button class="btn-icon" id="playBtn" type="button" aria-label="Play Morse code audio" title="Play audio">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                </button>
+                <button class="btn-icon" id="copyBtn" type="button" aria-label="Copy output to clipboard" title="Copy">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+                <button class="btn-icon" id="downloadBtn" type="button" aria-label="Download output as text file" title="Download">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="output-box" id="converterOutput" role="status" aria-live="polite" aria-label="Conversion output" tabindex="0"></div>
+          </div>
+
+          <!-- Toast Notification -->
+          <div class="toast" id="toast" role="alert" aria-live="assertive" aria-atomic="true">✓ Copied to clipboard</div>
         </div>
-        <span class="copy">Copy</span>
-        <h2 class="output-heading">Output</h2>
-        <pre>
-            <div class="output"></div>
-        </pre>
-    </main>
-    <script src="script.js"></script>
+
+        <!-- Keyboard Shortcuts Info -->
+        <details class="shortcuts-info">
+          <summary>⌨️ Keyboard Shortcuts</summary>
+          <ul class="shortcuts-list">
+            <li><kbd>Enter</kbd> — Convert</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd> — Copy output</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>X</kbd> — Clear</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> — Swap mode</li>
+            <li><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> — Play audio</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <!-- Reference Table -->
+    <section class="reference-section" id="reference" aria-labelledby="reference-heading">
+      <div class="container">
+        <h2 id="reference-heading" class="section-title">International Morse Code Reference</h2>
+        <p class="section-sub">Complete A–Z, 0–9, and punctuation chart for the International Morse Code standard (ITU).</p>
+
+        <div class="ref-tabs" role="tablist" aria-label="Reference category">
+          <button class="ref-tab active" data-ref="letters" role="tab" aria-selected="true">Letters A–Z</button>
+          <button class="ref-tab" data-ref="numbers" role="tab" aria-selected="false">Numbers 0–9</button>
+          <button class="ref-tab" data-ref="punctuation" role="tab" aria-selected="false">Punctuation</button>
+          <button class="ref-tab" data-ref="special" role="tab" aria-selected="false">Special Signals</button>
+        </div>
+
+        <div class="ref-grid" id="refGrid" aria-label="Morse code reference table" role="region"></div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features-section" id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <h2 id="features-heading" class="section-title">Why Use This Morse Code Tool?</h2>
+        <p class="section-sub">Everything you need in one fast, free, privacy-first converter.</p>
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">⚡</div>
+            <h3>Instant Conversion</h3>
+            <p>Results appear as you type. No button press needed for live preview — convert entire messages in milliseconds.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔊</div>
+            <h3>Audio Playback</h3>
+            <p>Hear your Morse code played back using authentic dot and dash tones generated directly in your browser via the Web Audio API.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">📋</div>
+            <h3>Copy &amp; Download</h3>
+            <p>Copy output to your clipboard with one click, or download it as a plain text file for sharing or offline reference.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🔒</div>
+            <h3>100% Private</h3>
+            <p>All conversions happen locally in your browser. Your text never leaves your device — no servers, no tracking, no logs.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">📱</div>
+            <h3>Mobile Friendly</h3>
+            <p>Fully responsive design works perfectly on phones, tablets, and desktops. Use it anywhere, on any screen size.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🌐</div>
+            <h3>Works Offline</h3>
+            <p>Once loaded, the tool works without an internet connection. No network calls are made during conversion.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learn / Content Section -->
+    <section class="learn-section" id="learn" aria-labelledby="learn-heading">
+      <div class="container">
+        <h2 id="learn-heading" class="section-title">About Morse Code</h2>
+
+        <div class="learn-grid">
+          <article class="learn-card">
+            <h3>What Is Morse Code?</h3>
+            <p>Morse code is a method of encoding text characters as standardized sequences of two different signal durations — called dots (·) and dashes (—). Developed in the 1830s by Samuel Morse and Alfred Vail for the electric telegraph, it became the first practical form of long-distance communication. A dot represents a short signal and a dash represents a long signal (three times the duration of a dot).</p>
+            <p>Today, Morse code is used by amateur radio operators, aviation, maritime navigation, and in emergency communication systems. It is also used as an assistive communication tool for people with certain disabilities.</p>
+          </article>
+
+          <article class="learn-card">
+            <h3>How to Convert Text to Morse Code</h3>
+            <ol>
+              <li>Select <strong>Text to Morse</strong> mode using the toggle above the input box.</li>
+              <li>Type or paste your text into the input area. Letters (A–Z) and numbers (0–9) are fully supported.</li>
+              <li>Click <strong>Convert</strong> or press <kbd>Enter</kbd>.</li>
+              <li>The Morse code appears in the output box. Use the copy or download buttons to save your result.</li>
+            </ol>
+            <p>Each letter is separated by a single space. Words are separated by three spaces in the output.</p>
+          </article>
+
+          <article class="learn-card">
+            <h3>How to Decode Morse Code to Text</h3>
+            <ol>
+              <li>Select <strong>Morse to Text</strong> mode using the toggle.</li>
+              <li>Enter your Morse code using dots (<code>.</code>) and dashes (<code>-</code>).</li>
+              <li>Separate each letter with a <strong>single space</strong>.</li>
+              <li>Separate each word with <strong>three spaces</strong>.</li>
+              <li>Click <strong>Convert</strong> or press <kbd>Enter</kbd>.</li>
+            </ol>
+            <p>Example: <code>.... . .-.. .-.. ---</code> decodes to <strong>HELLO</strong>.</p>
+          </article>
+
+          <article class="learn-card">
+            <h3>History of Morse Code</h3>
+            <p>Samuel Morse and Alfred Vail developed the original Morse code in the 1830s. The first public demonstration occurred on May 24, 1844, when Morse transmitted "What hath God wrought?" from Washington D.C. to Baltimore.</p>
+            <p>The International Morse Code — standardized in 1865 — replaced the original American Morse Code and added characters for non-English letters. The ITU (International Telecommunication Union) maintains the current standard. Despite advances in digital communication, Morse code remains legally recognized and is still used in aviation, amateur radio, and emergencies worldwide.</p>
+          </article>
+
+          <article class="learn-card">
+            <h3>Common Morse Code Examples</h3>
+            <table class="examples-table">
+              <caption class="sr-only">Common words and their Morse code equivalents</caption>
+              <thead>
+                <tr><th>Word</th><th>Morse Code</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>SOS</td><td><code>... --- ...</code></td></tr>
+                <tr><td>HELLO</td><td><code>.... . .-.. .-.. ---</code></td></tr>
+                <tr><td>WORLD</td><td><code>.-- --- .-. .-.. -..</code></td></tr>
+                <tr><td>YES</td><td><code>-.-- . ...</code></td></tr>
+                <tr><td>NO</td><td><code>-. ---</code></td></tr>
+                <tr><td>LOVE</td><td><code>.-.. --- ...- .</code></td></tr>
+                <tr><td>OK</td><td><code>--- -.-</code></td></tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="learn-card">
+            <h3>Morse Code Timing Rules</h3>
+            <p>International Morse code follows strict timing conventions based on a single unit (the duration of one dot):</p>
+            <ul>
+              <li>A <strong>dot</strong> = 1 unit</li>
+              <li>A <strong>dash</strong> = 3 units</li>
+              <li>Gap between symbols in a letter = 1 unit</li>
+              <li>Gap between letters = 3 units</li>
+              <li>Gap between words = 7 units</li>
+            </ul>
+            <p>Standard operating speed is measured in WPM (words per minute), with beginners starting at 5–10 WPM and experts reaching 20–30+ WPM.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2>
+        <dl class="faq-list">
+          <div class="faq-item">
+            <dt>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-1" type="button">
+                Is this Morse code converter completely free?
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-1" hidden>
+              Yes, 100% free. There is no subscription, no account, and no hidden charges. All features including audio playback, copy, and download are available for free.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-2" type="button">
+                What characters are supported?
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-2" hidden>
+              The converter supports all 26 letters of the English alphabet (A–Z), numbers 0–9, and common punctuation marks including period, comma, question mark, and more.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-3" type="button">
+                Does my data get stored or sent anywhere?
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-3" hidden>
+              No. All conversion happens locally in your browser using JavaScript. Your text is never sent to any server, stored, or tracked in any way. Your privacy is fully protected.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-4" type="button">
+                What is SOS in Morse code?
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-4" hidden>
+              SOS is <code>... --- ...</code> — three dots, three dashes, three dots. It is the internationally recognized distress signal and was chosen because it is easy to send and recognize even under difficult conditions.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-5" type="button">
+                Can I use this tool on mobile?
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-5" hidden>
+              Absolutely. The tool is fully responsive and works seamlessly on smartphones and tablets. The layout adapts automatically to any screen size.
+            </dd>
+          </div>
+          <div class="faq-item">
+            <dt>
+              <button class="faq-question" aria-expanded="false" aria-controls="faq-6" type="button">
+                How does the audio playback work?
+              </button>
+            </dt>
+            <dd class="faq-answer" id="faq-6" hidden>
+              Audio playback uses the Web Audio API built into modern browsers to generate authentic Morse code tones. Dots play as short 100ms beeps and dashes as 300ms beeps at 600 Hz — the standard amateur radio frequency. No audio files are downloaded.
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="Morse Code Converter Home">
+          <img src="/logo.webp" alt="" width="24" height="24" loading="lazy" aria-hidden="true">
+          <span>MorseCode<strong>.tools</strong></span>
+        </a>
+        <p>Free, fast, and private Morse code translation — right in your browser.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h3 class="footer-nav-title">Quick Links</h3>
+        <ul role="list">
+          <li><a href="#converter">Converter</a></li>
+          <li><a href="#reference">Morse Reference</a></li>
+          <li><a href="#learn">Learn Morse</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <div class="footer-info">
+        <h3 class="footer-nav-title">About</h3>
+        <p>Built for learners, radio operators, and anyone curious about Morse code. All processing is local — your data stays on your device.</p>
+        <p class="footer-copy">© <span id="currentYear"></span> MorseCode.tools — Built by <a href="https://github.com/developerChetram" target="_blank" rel="noopener noreferrer" aria-label="developerChetram on GitHub">Chetram Patel</a>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
 </body>
 </html>

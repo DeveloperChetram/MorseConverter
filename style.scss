@@ -1,343 +1,872 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ============================================================
+   CSS Custom Properties
+   ============================================================ */
+:root {
+  --bg: #0d1117;
+  --bg-2: #161b22;
+  --bg-3: #21262d;
+  --border: #30363d;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --green: #39ff14;
+  --green-dim: #169600;
+  --green-bg: #0d2b0d;
+  --red: #ff6b6b;
+  --red-bg: #2d0000;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --font: 'Inter', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+  --transition: 0.25s ease;
+}
+
+[data-theme="light"] {
+  --bg: #f6f8fa;
+  --bg-2: #ffffff;
+  --bg-3: #eaeef2;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --text-muted: #57606a;
+  --green: #1a7f37;
+  --green-dim: #1a7f37;
+  --green-bg: #dafbe1;
+  --shadow: 0 4px 24px rgba(0,0,0,0.1);
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  transition: background var(--transition), color var(--transition);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--green); text-decoration: none; transition: opacity var(--transition); }
+a:hover { opacity: 0.8; }
+a:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 3px; }
+
+button:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
+ul, ol { list-style: none; }
+
+kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ============================================================
+   Skip Link
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 1rem;
+  background: var(--green);
+  color: #000;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s;
+  &:focus { top: 1rem; }
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13,17,23,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+
+  [data-theme="light"] & {
+    background: rgba(246,248,250,0.88);
   }
+}
 
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  gap: 1rem;
+}
 
-    
-  
-  
-  body {
-    
-    font-family: 'Poppins', sans-serif;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: repeat;
-    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 2000 1400%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask id=%22b%22 x=%220%22 y=%220%22 width=%222000%22 height=%221400%22%3E%3Cpath fill=%22url(%23a)%22 d=%22M0 0h2000v1400H0z%22%2F%3E%3C%2Fmask%3E%3Cpath fill=%22%230d1117%22 d=%22M0 0h2000v1400H0z%22%2F%3E%3Cg style=%22transform-origin:center center%22 stroke=%22%231696008a%22 fill=%22none%22 mask=%22url(%23b)%22%3E%3Cpath d=%22M333.333 0H400v66.667h-66.667zM400 0h66.667v66.667H400zM533.333 0H600v66.667h-66.667zM600 0h66.667v66.667H600zM733.333 0H800v66.667h-66.667zM800 0h66.667v66.667H800zM866.667 0h66.667v66.667h-66.667zM1133.333 0H1200v66.667h-66.667zM1200 0h66.667v66.667H1200zM1466.667 0h66.667v66.667h-66.667zM1600 0h66.667v66.667H1600zM1800 0h66.667v66.667H1800zM1866.667 0h66.667v66.667h-66.667zM66.667 66.667h66.667v66.667H66.667zM266.667 66.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M333.333 66.667H400v66.667h-66.667zM466.667 66.667h66.667v66.667h-66.667zM666.667 66.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M733.333 66.667H800v66.667h-66.667zM866.667 66.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M933.333 66.667H1000v66.667h-66.667zM1000 66.667h66.667v66.667H1000zM1266.667 66.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1333.333 66.667H1400v66.667h-66.667zM1400 66.667h66.667v66.667H1400zM1600 66.667h66.667v66.667H1600zM1733.333 66.667H1800v66.667h-66.667zM1933.333 66.667H2000v66.667h-66.667zM0 133.333h66.667V200H0zM66.667 133.333h66.667V200H66.667zM200 133.333h66.667V200H200z%22%2F%3E%3Cpath d=%22M266.667 133.333h66.667V200h-66.667zM400 133.333h66.667V200H400z%22%2F%3E%3Cpath d=%22M466.667 133.333h66.667V200h-66.667zM600 133.333h66.667V200H600zM800 133.333h66.667V200H800zM866.667 133.333h66.667V200h-66.667z%22%2F%3E%3Cpath d=%22M933.333 133.333H1000V200h-66.667zM1066.667 133.333h66.667V200h-66.667zM1200 133.333h66.667V200H1200zM1266.667 133.333h66.667V200h-66.667zM1400 133.333h66.667V200H1400zM1466.667 133.333h66.667V200h-66.667zM1600 133.333h66.667V200H1600zM1666.667 133.333h66.667V200h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 133.333H1800V200h-66.667zM1800 133.333h66.667V200H1800zM1866.667 133.333h66.667V200h-66.667zM0 200h66.667v66.667H0zM66.667 200h66.667v66.667H66.667zM266.667 200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M333.333 200H400v66.667h-66.667zM533.333 200H600v66.667h-66.667zM733.333 200H800v66.667h-66.667zM866.667 200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M933.333 200H1000v66.667h-66.667zM1133.333 200H1200v66.667h-66.667zM1333.333 200H1400v66.667h-66.667zM1533.333 200H1600v66.667h-66.667zM1666.667 200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 200H1800v66.667h-66.667zM1800 200h66.667v66.667H1800zM0 266.667h66.667v66.667H0zM266.667 266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M333.333 266.667H400v66.667h-66.667zM400 266.667h66.667v66.667H400z%22%2F%3E%3Cpath d=%22M466.667 266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M533.333 266.667H600v66.667h-66.667zM666.667 266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M733.333 266.667H800v66.667h-66.667zM1000 266.667h66.667v66.667H1000zM1133.333 266.667H1200v66.667h-66.667zM1266.667 266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1333.333 266.667H1400v66.667h-66.667zM1400 266.667h66.667v66.667H1400zM1666.667 266.667h66.667v66.667h-66.667zM1800 266.667h66.667v66.667H1800zM1933.333 266.667H2000v66.667h-66.667zM0 333.333h66.667V400H0zM66.667 333.333h66.667V400H66.667z%22%2F%3E%3Cpath d=%22M133.333 333.333H200V400h-66.667zM266.667 333.333h66.667V400h-66.667zM533.333 333.333H600V400h-66.667zM600 333.333h66.667V400H600zM733.333 333.333H800V400h-66.667zM800 333.333h66.667V400H800zM1000 333.333h66.667V400H1000zM1066.667 333.333h66.667V400h-66.667z%22%2F%3E%3Cpath d=%22M1133.333 333.333H1200V400h-66.667zM1400 333.333h66.667V400H1400zM1466.667 333.333h66.667V400h-66.667z%22%2F%3E%3Cpath d=%22M1533.333 333.333H1600V400h-66.667zM1666.667 333.333h66.667V400h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 333.333H1800V400h-66.667zM1800 333.333h66.667V400H1800zM1866.667 333.333h66.667V400h-66.667zM0 400h66.667v66.667H0zM133.333 400H200v66.667h-66.667zM200 400h66.667v66.667H200z%22%2F%3E%3Cpath d=%22M266.667 400h66.667v66.667h-66.667zM533.333 400H600v66.667h-66.667zM600 400h66.667v66.667H600zM866.667 400h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M933.333 400H1000v66.667h-66.667zM1000 400h66.667v66.667H1000zM1200 400h66.667v66.667H1200zM1466.667 400h66.667v66.667h-66.667zM1733.333 400H1800v66.667h-66.667zM1800 400h66.667v66.667H1800zM1933.333 400H2000v66.667h-66.667zM0 466.667h66.667v66.667H0zM66.667 466.667h66.667v66.667H66.667zM266.667 466.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M333.333 466.667H400v66.667h-66.667zM400 466.667h66.667v66.667H400zM533.333 466.667H600v66.667h-66.667zM600 466.667h66.667v66.667H600zM666.667 466.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M733.333 466.667H800v66.667h-66.667zM800 466.667h66.667v66.667H800zM866.667 466.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M933.333 466.667H1000v66.667h-66.667zM1000 466.667h66.667v66.667H1000zM1266.667 466.667h66.667v66.667h-66.667zM1466.667 466.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1533.333 466.667H1600v66.667h-66.667zM1666.667 466.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 466.667H1800v66.667h-66.667zM1866.667 466.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 466.667H2000v66.667h-66.667zM66.667 533.333h66.667V600H66.667z%22%2F%3E%3Cpath d=%22M133.333 533.333H200V600h-66.667zM200 533.333h66.667V600H200zM333.333 533.333H400V600h-66.667zM400 533.333h66.667V600H400zM533.333 533.333H600V600h-66.667zM800 533.333h66.667V600H800zM866.667 533.333h66.667V600h-66.667z%22%2F%3E%3Cpath d=%22M933.333 533.333H1000V600h-66.667zM1066.667 533.333h66.667V600h-66.667zM1200 533.333h66.667V600H1200zM1266.667 533.333h66.667V600h-66.667zM1533.333 533.333H1600V600h-66.667zM1733.333 533.333H1800V600h-66.667zM1800 533.333h66.667V600H1800zM1933.333 533.333H2000V600h-66.667zM0 600h66.667v66.667H0zM133.333 600H200v66.667h-66.667zM200 600h66.667v66.667H200z%22%2F%3E%3Cpath d=%22M266.667 600h66.667v66.667h-66.667zM466.667 600h66.667v66.667h-66.667zM666.667 600h66.667v66.667h-66.667zM866.667 600h66.667v66.667h-66.667zM1066.667 600h66.667v66.667h-66.667zM1200 600h66.667v66.667H1200zM1333.333 600H1400v66.667h-66.667zM1800 600h66.667v66.667H1800zM0 666.667h66.667v66.667H0zM66.667 666.667h66.667v66.667H66.667zM200 666.667h66.667v66.667H200z%22%2F%3E%3Cpath d=%22M266.667 666.667h66.667v66.667h-66.667zM800 666.667h66.667v66.667H800zM866.667 666.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M933.333 666.667H1000v66.667h-66.667zM1066.667 666.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1133.333 666.667H1200v66.667h-66.667zM1333.333 666.667H1400v66.667h-66.667zM1400 666.667h66.667v66.667H1400zM1600 666.667h66.667v66.667H1600zM1666.667 666.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 666.667H1800v66.667h-66.667zM0 733.333h66.667V800H0zM133.333 733.333H200V800h-66.667zM266.667 733.333h66.667V800h-66.667zM400 733.333h66.667V800H400zM533.333 733.333H600V800h-66.667zM733.333 733.333H800V800h-66.667zM866.667 733.333h66.667V800h-66.667z%22%2F%3E%3Cpath d=%22M933.333 733.333H1000V800h-66.667zM1000 733.333h66.667V800H1000zM1200 733.333h66.667V800H1200zM1333.333 733.333H1400V800h-66.667zM1400 733.333h66.667V800H1400zM1466.667 733.333h66.667V800h-66.667z%22%2F%3E%3Cpath d=%22M1533.333 733.333H1600V800h-66.667zM1600 733.333h66.667V800H1600zM1666.667 733.333h66.667V800h-66.667zM1800 733.333h66.667V800H1800zM1933.333 733.333H2000V800h-66.667zM466.667 800h66.667v66.667h-66.667zM1000 800h66.667v66.667H1000zM1066.667 800h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1133.333 800H1200v66.667h-66.667zM1266.667 800h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1333.333 800H1400v66.667h-66.667zM1533.333 800H1600v66.667h-66.667zM1600 800h66.667v66.667H1600zM1733.333 800H1800v66.667h-66.667zM1800 800h66.667v66.667H1800zM1866.667 800h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 800H2000v66.667h-66.667zM66.667 866.667h66.667v66.667H66.667zM466.667 866.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M533.333 866.667H600v66.667h-66.667zM600 866.667h66.667v66.667H600zM666.667 866.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M733.333 866.667H800v66.667h-66.667zM800 866.667h66.667v66.667H800zM933.333 866.667H1000v66.667h-66.667zM1266.667 866.667h66.667v66.667h-66.667zM1466.667 866.667h66.667v66.667h-66.667zM1600 866.667h66.667v66.667H1600zM1666.667 866.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 866.667H1800v66.667h-66.667zM0 933.333h66.667V1000H0zM66.667 933.333h66.667V1000H66.667z%22%2F%3E%3Cpath d=%22M133.333 933.333H200V1000h-66.667zM333.333 933.333H400V1000h-66.667zM466.667 933.333h66.667V1000h-66.667zM866.667 933.333h66.667V1000h-66.667z%22%2F%3E%3Cpath d=%22M933.333 933.333H1000V1000h-66.667zM1200 933.333h66.667V1000H1200zM1266.667 933.333h66.667V1000h-66.667z%22%2F%3E%3Cpath d=%22M1333.333 933.333H1400V1000h-66.667zM1400 933.333h66.667V1000H1400zM1466.667 933.333h66.667V1000h-66.667zM1600 933.333h66.667V1000H1600zM1866.667 933.333h66.667V1000h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 933.333H2000V1000h-66.667zM0 1000h66.667v66.667H0zM66.667 1000h66.667v66.667H66.667z%22%2F%3E%3Cpath d=%22M133.333 1000H200v66.667h-66.667zM200 1000h66.667v66.667H200zM533.333 1000H600v66.667h-66.667zM666.667 1000h66.667v66.667h-66.667zM800 1000h66.667v66.667H800zM1133.333 1000H1200v66.667h-66.667zM1333.333 1000H1400v66.667h-66.667zM1400 1000h66.667v66.667H1400zM1466.667 1000h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1533.333 1000H1600v66.667h-66.667zM1733.333 1000H1800v66.667h-66.667zM1866.667 1000h66.667v66.667h-66.667zM66.667 1066.667h66.667v66.667H66.667zM200 1066.667h66.667v66.667H200zM333.333 1066.667H400v66.667h-66.667zM400 1066.667h66.667v66.667H400z%22%2F%3E%3Cpath d=%22M466.667 1066.667h66.667v66.667h-66.667zM666.667 1066.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M733.333 1066.667H800v66.667h-66.667zM800 1066.667h66.667v66.667H800zM866.667 1066.667h66.667v66.667h-66.667zM1066.667 1066.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1133.333 1066.667H1200v66.667h-66.667zM1200 1066.667h66.667v66.667H1200zM1466.667 1066.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1533.333 1066.667H1600v66.667h-66.667zM1600 1066.667h66.667v66.667H1600zM1666.667 1066.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 1066.667H1800v66.667h-66.667zM1866.667 1066.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 1066.667H2000v66.667h-66.667zM0 1133.333h66.667V1200H0zM66.667 1133.333h66.667V1200H66.667z%22%2F%3E%3Cpath d=%22M133.333 1133.333H200V1200h-66.667zM400 1133.333h66.667V1200H400z%22%2F%3E%3Cpath d=%22M466.667 1133.333h66.667V1200h-66.667zM600 1133.333h66.667V1200H600zM733.333 1133.333H800V1200h-66.667zM866.667 1133.333h66.667V1200h-66.667zM1000 1133.333h66.667V1200H1000zM1266.667 1133.333h66.667V1200h-66.667z%22%2F%3E%3Cpath d=%22M1333.333 1133.333H1400V1200h-66.667zM1533.333 1133.333H1600V1200h-66.667zM1866.667 1133.333h66.667V1200h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 1133.333H2000V1200h-66.667zM200 1200h66.667v66.667H200z%22%2F%3E%3Cpath d=%22M266.667 1200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M333.333 1200H400v66.667h-66.667zM533.333 1200H600v66.667h-66.667zM866.667 1200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M933.333 1200H1000v66.667h-66.667zM1066.667 1200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1133.333 1200H1200v66.667h-66.667zM1400 1200h66.667v66.667H1400zM1533.333 1200H1600v66.667h-66.667zM1600 1200h66.667v66.667H1600zM1666.667 1200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 1200H1800v66.667h-66.667zM1866.667 1200h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 1200H2000v66.667h-66.667zM66.667 1266.667h66.667v66.667H66.667z%22%2F%3E%3Cpath d=%22M133.333 1266.667H200v66.667h-66.667zM200 1266.667h66.667v66.667H200zM466.667 1266.667h66.667v66.667h-66.667zM600 1266.667h66.667v66.667H600zM666.667 1266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M733.333 1266.667H800v66.667h-66.667zM800 1266.667h66.667v66.667H800zM866.667 1266.667h66.667v66.667h-66.667zM1000 1266.667h66.667v66.667H1000zM1133.333 1266.667H1200v66.667h-66.667zM1466.667 1266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1533.333 1266.667H1600v66.667h-66.667zM1666.667 1266.667h66.667v66.667h-66.667z%22%2F%3E%3Cpath d=%22M1733.333 1266.667H1800v66.667h-66.667zM1933.333 1266.667H2000v66.667h-66.667zM0 1333.333h66.667V1400H0zM133.333 1333.333H200V1400h-66.667zM200 1333.333h66.667V1400H200zM333.333 1333.333H400V1400h-66.667zM466.667 1333.333h66.667V1400h-66.667z%22%2F%3E%3Cpath d=%22M533.333 1333.333H600V1400h-66.667zM866.667 1333.333h66.667V1400h-66.667zM1000 1333.333h66.667V1400H1000zM1133.333 1333.333H1200V1400h-66.667zM1200 1333.333h66.667V1400H1200zM1266.667 1333.333h66.667V1400h-66.667z%22%2F%3E%3Cpath d=%22M1333.333 1333.333H1400V1400h-66.667zM1533.333 1333.333H1600V1400h-66.667zM1600 1333.333h66.667V1400H1600zM1800 1333.333h66.667V1400H1800zM1866.667 1333.333h66.667V1400h-66.667z%22%2F%3E%3Cpath d=%22M1933.333 1333.333H2000V1400h-66.667z%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3CradialGradient id=%22a%22%3E%3Cstop offset=%220%22 stop-color=%22%23fff%22%2F%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3C%2Fsvg%3E");
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  img { border-radius: 6px; }
+  strong { color: var(--green); }
+}
 
-    // background-color: #0d1117; // GitHub dark background
-    // background: url;
-    color: #c9d1d9; // GitHub dark text color
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  
-    main {
-      .toggle{
-        display: flex;
-        gap: 10px;
-        padding-top:10px ;
-        span{
-          cursor: pointer;
-          transition: all 0.3s ease;
-          // display: none;
-          // opacity: 0;
-          font-size: .8rem;
-          border: 1px solid #39ff14;           // Neon green border
-          background-color: #112b11;           // Dark greenish background
-          color: #39ff14;                      // Neon green text
-          padding: 10px;
-          border-radius: 5px;
-          margin-top: 10px;
-          // width: 90%;
-          text-align: center;
-          
-          // border: 1px solid transparent;
-          text-align: center;
-          &:nth-child(2){
-            color:#d9d9d9;
-            border: 1px solid #d9d9d9;   
-            background-color: transparent;
-          }
-        }
-      }
-
-        .alert {
-            transition: all 0.3s ease;
-            // display: none;
-            opacity: 0;
-            font-size: .8rem;
-            border: 1px solid #39ff14;           // Neon green border
-            background-color: #112b11;           // Dark greenish background
-            color: #39ff14;                      // Neon green text
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            // width: 90%;
-            text-align: center;
-            
-            // border: 1px solid transparent;
-            text-align: center;
-        }
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-      
-      input {
-        backdrop-filter: blur(1.5px); // Subtle blur effect for inputs
-        width: 90%;
-        height: 20%;
-        border-radius: 5px;
-        border: 1px solid #30363d; // Subtle dark border
-        background-color: #161b2288; // Dark background for inputs
-        padding: 10px;
-        font-size: 16px;
-        color: #c9d1d9; // Matching text color
-      }
-      
-      pre {
-        width: 90%;
-        height: 25%;
-        
-        .output {
-            overflow-wrap: break-word;
-            white-space: pre-wrap;
-            word-break: break-word;
-            // word-wrap: break-word;
-            // word-break: break-word;
-            line-height: 1.5; // Improved line spacing
-            // white-space: wrap; // Prevent overflow
-            position: relative;
-            // font-size: large;
-            font-weight: 900;
-          padding: 20px;
-          width: 100%;
-          height: 100%;
-          border-radius: 5px;
-          border: 1px solid #30363d;
-          backdrop-filter: blur(1.5px); // Subtle blur effect for output
-          background-color: #161b2288;          font-size: 1.5rem; // Increased output text size
-          line-height: 1.5; // Improved line spacing
-          color: #169600; // Neon green text for output
-          overflow-y: auto; // Scroll if content overflows
-            
-          
-          
-          
-        }
-      }
-      
-      button {
-        width: 300px;
-        height: 40px;
-        border-radius: 5px;
-        border: none;
-        background-color: #179b00; // Neon green button
-        color: #0d1117; // Dark text on neon for contrast
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.1s ease;
-        
-        &:hover {
-          background-color: #2ecc71; // Slightly different green on hover
-        }
-        
-        &:active {
-          transform: scale(0.95); // Quick scale down effect when clicked
-        }
-      }
-      .clear {
-        width: 300px;
-        height: 40px;
-        border-radius: 5px;
-        border: none;
-        border: 1px solid transparent;        // Neon green border
-        background-color: transparent;           // Dark greenish background
-        color: #0d1117;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.1s ease;
-        background-color: #ff6b6b; // Slightly different green on hover
-        &:hover {
-          background-color: #f83c3c; // Slightly different green on hover
-         border:2px solid #330000 ;
-          color: #0d1117; // Dark text on neon for contrast
-        }
-    }
-    }
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  a {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    &:hover { color: var(--text); }
   }
-  
-  .invalid {
-    font-size: .7rem;
-    border: 1px solid #ff6b6b;
-    background-color: #330000;
-    color: #ff6b6b;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    width: 90%;
-    text-align: center;
+}
+
+.theme-toggle {
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.35rem 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  transition: background var(--transition);
+  &:hover { background: var(--border); }
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  padding: 5rem 0 4rem;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(57,255,20,0.08) 0%, transparent 70%);
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--green-bg);
+  color: var(--green);
+  border: 1px solid var(--green-dim);
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.3rem 0.85rem;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--text) 0%, var(--green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  max-width: 480px;
+}
+
+.hero-morse {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow), 0 0 40px rgba(57,255,20,0.06);
+}
+
+.morse-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.md-label {
+  font-family: var(--mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.15em;
+}
+
+.md-code {
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  word-break: break-all;
+  line-height: 1.8;
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 8px;
+  border: none;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #000;
+  &:hover { background: #5fff3a; transform: translateY(-1px); }
+  &:active { transform: scale(0.97); }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  &:hover { background: var(--bg-3); }
+  &:active { transform: scale(0.97); }
+}
+
+.btn-danger {
+  background: var(--red-bg);
+  color: var(--red);
+  border: 1px solid #5a0000;
+  &:hover { background: #3d0000; }
+  &:active { transform: scale(0.97); }
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: all var(--transition);
+  &:hover { background: var(--border); color: var(--green); }
+  &.playing { color: var(--green); border-color: var(--green); }
+}
+
+/* ============================================================
+   Section Titles
+   ============================================================ */
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.section-sub {
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   Converter Section
+   ============================================================ */
+.converter-section {
+  padding: 4rem 0;
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.3rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+
+  &.active {
+    background: var(--green-bg);
+    border-color: var(--green);
+    color: var(--green);
   }
-  
+  &:hover:not(.active) { background: var(--bg-3); color: var(--text); }
+}
 
+.converter-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  max-width: 780px;
+  margin: 0 auto;
+  position: relative;
+}
 
-    .copy {
-        opacity: 0;
-        // display: none;
-        // position: absolute;
-        top: 0;
-        right:10px;
-        font-size: 1rem;
-        background-color: #00bd1c;
-        color: #f1f1f1;
-        padding: 5px 10px;
-        border-radius: 5px;
-        margin-top: 10px;
-        // width: 90%;
-        border: 1px solid transparent;
-        text-align: center;
-        cursor: pointer;
-        &:hover {
-            background-color: transparent;
-            color: #00bd1c;
-            border: 1px solid #00bd1c;
-    
-        }
-        &:active {
-            transform: scale(0.95); // Quick scale down effect when clicked
-        }
-    }
+.input-group { margin-bottom: 1.25rem; }
 
-    @media screen and (max-width: 768px) {
-        body {
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        }
-        main {
-          width: 100%;
-          height: 100%;
-          padding: 20px;
-          h1{
-            text-align: center;
-          }
-        }
-      .buttons{
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-      }
-      
-    }
+.input-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+}
 
-.help-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 30px;
-    background-color: #161b22;
-    color: #c9d1d9;
-    border: 1px solid #30363d;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.converter-textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.6;
+  transition: border-color var(--transition);
+  &:focus {
+    outline: none;
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(57,255,20,0.1);
+  }
+  &::placeholder { color: var(--text-muted); }
+}
+
+.input-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+}
+
+.input-hint { font-size: 0.78rem; color: var(--text-muted); }
+.char-count { font-size: 0.78rem; color: var(--text-muted); font-family: var(--mono); }
+
+.action-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.output-group { }
+
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.output-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.output-actions { display: flex; gap: 0.4rem; }
+
+.output-box {
+  min-height: 120px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  color: var(--green);
+  line-height: 1.8;
+  word-break: break-all;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  cursor: text;
+
+  &:empty::before {
+    content: 'Output will appear here…';
+    color: var(--text-muted);
+    font-style: italic;
+  }
+}
+
+.invalid {
+  color: var(--red);
+  background: var(--red-bg);
+  border: 1px solid #5a0000;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85em;
+}
+
+.toast {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--green);
+  color: #000;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+
+  &.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.shortcuts-info {
+  max-width: 780px;
+  margin: 1.25rem auto 0;
+  summary {
     cursor: pointer;
-    font-size: 18px;
-    transition: all 0.3s ease;
-    z-index: 1000;
-
-    &:hover {
-        background-color: #21262d;
-        border-color: #8b949e;
-    }
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    user-select: none;
+    &:hover { color: var(--text); }
+  }
 }
 
-.help-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1001;
-    backdrop-filter: blur(5px);
-
-    &.active {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.shortcuts-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin-top: 0.75rem;
+  li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
 }
 
-.modal-content {
-    background-color: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 6px;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    color: #c9d1d9;
-
-    h2 {
-        color: #39ff14;
-        margin-bottom: 20px;
-        font-size: 1.5rem;
-    }
-
-    h3 {
-        color: #8b949e;
-        margin: 15px 0 10px;
-        font-size: 1.1rem;
-    }
-
-    ul {
-        list-style-type: none;
-        padding-left: 20px;
-
-        li {
-            margin: 8px 0;
-            position: relative;
-            padding-left: 20px;
-
-            &:before {
-                content: "•";
-                color: #39ff14;
-                position: absolute;
-                left: 0;
-            }
-        }
-    }
+/* ============================================================
+   Reference Section
+   ============================================================ */
+.reference-section {
+  padding: 4rem 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #8b949e;
-    font-size: 24px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-
-    &:hover {
-        color: #39ff14;
-    }
+.ref-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
 }
 
-@media screen and (max-width: 768px) {
-    .help-button {
-        top: 10px;
-        right: 10px;
-    }
+.ref-tab {
+  padding: 0.45rem 1.1rem;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
 
-    .modal-content {
-        width: 95%;
-        margin: 10px;
-        padding: 15px;
+  &.active {
+    background: var(--green-bg);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  &:hover:not(.active) { background: var(--bg-3); color: var(--text); }
+}
+
+.ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.6rem;
+}
+
+.ref-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all var(--transition);
+
+  &:hover {
+    border-color: var(--green);
+    background: var(--green-bg);
+    transform: translateY(-2px);
+  }
+}
+
+.ref-char {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
+.ref-morse {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--green);
+  letter-spacing: 0.08em;
+}
+
+.ref-dots {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.dash {
+  width: 18px;
+  height: 7px;
+  border-radius: 3px;
+  background: var(--green);
+}
+
+/* ============================================================
+   Features Section
+   ============================================================ */
+.features-section {
+  padding: 4rem 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.feature-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  transition: all var(--transition);
+
+  &:hover {
+    border-color: var(--green);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(57,255,20,0.08);
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0.75rem 0 0.5rem;
+    color: var(--text);
+  }
+
+  p { font-size: 0.9rem; color: var(--text-muted); }
+}
+
+.feature-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+/* ============================================================
+   Learn Section
+   ============================================================ */
+.learn-section {
+  padding: 4rem 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.learn-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.learn-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.75rem; &:last-child { margin-bottom: 0; } }
+
+  ol, ul {
+    padding-left: 1.2rem;
+    margin-bottom: 0.75rem;
+    li {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      list-style: decimal;
     }
+  }
+  ul li { list-style: disc; }
+
+  code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    color: var(--green);
+  }
+
+  strong { color: var(--text); }
+}
+
+.examples-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+
+  th {
+    text-align: left;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    padding: 0.4rem 0.6rem;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  td {
+    padding: 0.4rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    code { background: none; border: none; padding: 0; color: var(--green); }
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--bg-2); }
+}
+
+/* ============================================================
+   FAQ Section
+   ============================================================ */
+.faq-section {
+  padding: 4rem 0;
+}
+
+.faq-list {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  background: var(--bg-2);
+  overflow: hidden;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color var(--transition);
+
+  &::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: var(--green);
+    flex-shrink: 0;
+    transition: transform var(--transition);
+  }
+
+  &[aria-expanded="true"]::after { transform: rotate(45deg); }
+  &:hover { color: var(--green); }
+}
+
+.faq-answer {
+  padding: 0 1.25rem 1rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+
+  code {
+    font-family: var(--mono);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+    color: var(--green);
+  }
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 2rem;
+  margin-top: 0;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.footer-brand {
+  p { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.75rem; line-height: 1.6; }
+}
+
+.footer-nav-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  li a { font-size: 0.88rem; color: var(--text-muted); &:hover { color: var(--green); } }
+}
+
+.footer-info {
+  p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+}
+
+.footer-copy { font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero { padding: 3rem 0 2.5rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-sub { max-width: 100%; }
+  .hero-morse { padding: 1.25rem; }
+  .md-label { font-size: 1.1rem; }
+  .md-code { font-size: 0.8rem; }
+  .nav-links { display: none; }
+  .converter-card { padding: 1.25rem; }
+  .action-row { flex-direction: column; .btn { width: 100%; } }
+  .footer-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .learn-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .ref-grid { grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); }
+  .mode-toggle { flex-direction: column; align-items: stretch; .mode-btn { justify-content: center; } }
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-text { animation: fadeInUp 0.6s ease both; }
+.hero-morse { animation: fadeInUp 0.6s 0.15s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

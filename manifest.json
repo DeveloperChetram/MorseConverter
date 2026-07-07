@@ -1,0 +1,17 @@
+{
+  "name": "Morse Code Converter",
+  "short_name": "MorseConverter",
+  "description": "Free online Morse code converter — instantly translate text to Morse code and Morse code to text.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#39ff14",
+  "orientation": "any",
+  "icons": [
+    { "src": "/logo.webp", "sizes": "192x192", "type": "image/webp" },
+    { "src": "/logo.webp", "sizes": "512x512", "type": "image/webp" }
+  ],
+  "categories": ["utilities", "productivity"],
+  "lang": "en",
+  "scope": "/"
+}
